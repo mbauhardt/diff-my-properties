@@ -1,4 +1,4 @@
-name := "datameer-configuration"
+name := "diff-my-properties"
 
 scalaVersion := "2.11.7"
 

@@ -11,14 +11,14 @@ object Main {
   val HEADER_FORMAT = "%-50s %-80s %-80s %n"
 
   def main(args: Array[String]): Unit = {
-    print("Path to the new Datameer Installation: ")
-    val newDatameer = StdIn.readLine()
+    print("Path to the left properties folder: ")
+    val rightFolder = StdIn.readLine()
 
-    print("Path to the old Datameer Installation: ")
-    val oldDatameer = StdIn.readLine()
+    print("Path to the right properties folder: ")
+    val leftFolder = StdIn.readLine()
 
     val propertyFiles = PropertyFiles
-      .yieldPropertyFilesWithSameName(new File(oldDatameer + "/conf"), new File(newDatameer + "/conf"))
+      .yieldPropertyFilesWithSameName(new File(leftFolder), new File(rightFolder))
       .map(PropertyFiles.toPropertyFile)
 
     val printf = (t: (String, String, String)) => print(String.format(HEADER_FORMAT, t._1, t._2, t._3))

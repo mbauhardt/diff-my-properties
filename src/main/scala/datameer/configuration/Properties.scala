@@ -23,9 +23,9 @@ object Nil extends Properties {
 
   override def isEmpty: Boolean = true
 
-  override def head: (String, String) = throw new NoSuchElementException("Empty property does not have any value")
+  override def head: (String, String) = throw new NoSuchElementException("Empty properties does not have any head")
 
-  override def tail: Properties = throw new NoSuchElementException("Empty property does not have any value")
+  override def tail: Properties = throw new NoSuchElementException("Empty properties does not have any tail")
 
   override def keys: Set[String] = Set.empty
 
@@ -63,8 +63,3 @@ case class Cons(key: String, value: String, tail: Properties) extends Properties
     else tail.getValue(k)
   }
 }
-
-object Properties {
-  def apply(t: (String, String)): Properties = Cons(t._1, t._2, Nil)
-}
-
