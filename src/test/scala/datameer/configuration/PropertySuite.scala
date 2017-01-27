@@ -16,7 +16,6 @@ class PropertySuite extends FunSuite {
   test("property is not empty after add") {
     val pe: Property = Empty.add("key", "value")
     assert(pe.isEmpty == false)
-    assert(pe.state == PropertyState.Added)
   }
 
   test("empty property throws exc when calling key") {
@@ -31,18 +30,4 @@ class PropertySuite extends FunSuite {
     assert(pe.key == "key")
     assert(pe.value == "value")
   }
-
-  test("Add Update Add") {
-    val prop1 = Empty.add("key1", "value1")
-    val update = prop1.update("foo", "bar")
-
-    assert(prop1.key === "key1")
-    assert(prop1.value === "value1")
-    assert(prop1.state == PropertyState.Added)
-
-    assert(update.key === "foo")
-    assert(update.value === "bar")
-    assert(update.state == PropertyState.Updated)
-  }
-
 }

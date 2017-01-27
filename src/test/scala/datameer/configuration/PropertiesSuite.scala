@@ -39,23 +39,6 @@ class PropertiesSuite extends FunSuite {
     assert(Properties(Empty.add("key1", "value1").add("key2", "value2")).tail.head.value == "value2")
   }
 
-  test("Add Update Add") {
-    val properties = Properties(Empty.add("key1", "value1").add("key2", "value2").add("key3", "value3"))
-    val update1 = properties.update("key2", "foo")
-
-    assert(update1.head.key === "key1")
-    assert(update1.head.value === "value1")
-    assert(update1.head.state === PropertyState.Added)
-
-    assert(update1.tail.head.key === "key2")
-    assert(update1.tail.head.value === "foo")
-    assert(update1.tail.head.state === PropertyState.Updated)
-
-    assert(update1.tail.tail.head.key === "key3")
-    assert(update1.tail.tail.head.value === "value3")
-    assert(update1.tail.tail.head.state === PropertyState.Added)
-  }
-
   test("keys") {
     val properties = Properties(Empty.add("key1", "value1").add("key2", "value2").add("key3", "value3"))
     assert(properties.keys === Set("key1", "key2", "key3"))

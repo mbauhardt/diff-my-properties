@@ -1,8 +1,6 @@
 package datameer.configuration
 
 trait Properties {
-  def update(key: String, value: String): Properties
-
   def head: Property
 
   def tail: Properties
@@ -23,8 +21,6 @@ object Nil extends Properties {
 
   override def isEmpty: Boolean = true
 
-  override def update(s1: String, s2: String): Properties = throw new NoSuchElementException("Empty Properties can not be updated")
-
   override def keys: Set[String] = Set.empty
 
   def foldLeft[B](z: B)(f: (B, Property) => B): B = z
@@ -34,11 +30,6 @@ object Nil extends Properties {
 
 case class Cons(val head: Property, val tail: Properties) extends Properties {
   override def isEmpty: Boolean = false
-
-  override def update(key: String, value: String): Properties = {
-    if (head.key == key) Properties(head.update(key, value))
-    else Cons(Empty.add(head.key, head.value), tail.update(key, value))
-  }
 
   override def foldLeft[B](z: B)(f: (B, Property) => B): B = {
     var acc = z
