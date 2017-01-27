@@ -2,7 +2,7 @@ package datameer.configuration
 
 import java.io.File
 
-import datameer.configuration.ConfigFiles.PropertyFile
+import datameer.configuration.PropertyFiles.PropertyFile
 
 import scala.io.StdIn
 
@@ -17,9 +17,9 @@ object Main {
     print("Path to the old Datameer Installation: ")
     val oldDatameer = StdIn.readLine()
 
-    val propertyFiles = ConfigFiles
+    val propertyFiles = PropertyFiles
       .yieldPropertyFilesWithSameName(new File(oldDatameer + "/conf"), new File(newDatameer + "/conf"))
-      .map(ConfigFiles.toPropertyFile)
+      .map(PropertyFiles.toPropertyFile)
 
     val printf = (t: (String, String, String)) => print(String.format(HEADER_FORMAT, t._1, t._2, t._3))
     val printf2 = (t: (String, String, String)) => print(String.format(HEADER_FORMAT, t._1, t._3, t._2))

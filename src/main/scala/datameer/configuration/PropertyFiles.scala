@@ -4,7 +4,7 @@ import java.io.{File, FileInputStream}
 
 import scala.collection.JavaConverters._
 
-object ConfigFiles {
+object PropertyFiles {
 
   def propertyFiles(root: File, skipHidden: Boolean = false): Stream[File] = {
     tree(root).filter(f => f.isFile && f.getName.endsWith("properties"))
@@ -21,7 +21,6 @@ object ConfigFiles {
   def toPropertyFile(tuple: (File, File)): (PropertyFile, PropertyFile) = {
     tupleLift(loadProperties, tuple)
   }
-
 
   private def tupleLift[A, B](f: A => B, tuple: (A, A)): (B, B) = {
     (f(tuple._1), f(tuple._2))
@@ -44,8 +43,6 @@ object ConfigFiles {
       })
   }
 
-
   case class PropertyFile(file: File, properties: Properties)
-
 
 }
