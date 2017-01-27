@@ -2,11 +2,8 @@ package datameer.configuration
 
 import java.io.File
 
-import org.junit.runner.RunWith
 import org.scalatest.FunSuite
-import org.scalatest.junit.JUnitRunner
 
-@RunWith(classOf[JUnitRunner])
 class PropertyFilesSuite extends FunSuite {
 
   test("List property files only") {

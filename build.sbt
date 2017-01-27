@@ -1,9 +1,8 @@
 name := "diff-my-properties"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.1"
 
-scalacOptions ++= Seq("-deprecation")
+javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
-// grading libraries
-libraryDependencies += "org.scalatest" % "scalatest_2.10" % "1.9.1" % "test"
-libraryDependencies += "junit" % "junit" % "4.10" % "test"
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
