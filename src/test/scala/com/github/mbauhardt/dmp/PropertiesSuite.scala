@@ -1,4 +1,4 @@
-package datameer.configuration
+package com.github.mbauhardt.dmp
 
 import org.scalatest.FunSuite
 

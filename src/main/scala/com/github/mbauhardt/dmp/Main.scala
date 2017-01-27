@@ -1,8 +1,8 @@
-package datameer.configuration
+package com.github.mbauhardt.dmp
 
 import java.io.File
 
-import datameer.configuration.PropertyFiles.PropertyFile
+import com.github.mbauhardt.dmp.PropertyFiles.PropertyFile
 
 import scala.io.StdIn
 
