@@ -1,12 +1,12 @@
 package datameer.configuration
 
-trait Property {
+trait Properties {
 
   def head: (String, String)
 
-  def tail: Property
+  def tail: Properties
 
-  def add(key: String, value: String): Property
+  def add(key: String, value: String): Properties
 
   def isEmpty: Boolean
 
@@ -15,18 +15,17 @@ trait Property {
   def foldLeft[B](z: B)(f: (B, (String, String)) => B): B
 
   def getValue(key: String): Option[String]
-
 }
 
-object Empty extends Property {
+object Nil extends Properties {
 
-  override def add(key: String, value: String): Property = NonEmpty(key, value, Empty)
+  override def add(key: String, value: String): Properties = Cons(key, value, Nil)
 
   override def isEmpty: Boolean = true
 
   override def head: (String, String) = throw new NoSuchElementException("Empty property does not have any value")
 
-  override def tail: Property = throw new NoSuchElementException("Empty property does not have any value")
+  override def tail: Properties = throw new NoSuchElementException("Empty property does not have any value")
 
   override def keys: Set[String] = Set.empty
 
@@ -35,9 +34,9 @@ object Empty extends Property {
   override def getValue(key: String): Option[String] = None
 }
 
-case class NonEmpty(key: String, value: String, tail: Property) extends Property {
+case class Cons(key: String, value: String, tail: Properties) extends Properties {
 
-  override def add(k: String, v: String): Property = NonEmpty(key, value, tail.add(k, v))
+  override def add(k: String, v: String): Properties = Cons(key, value, tail.add(k, v))
 
   override def isEmpty: Boolean = false
 
@@ -51,7 +50,7 @@ case class NonEmpty(key: String, value: String, tail: Property) extends Property
 
   override def foldLeft[B](z: B)(f: (B, (String, String)) => B): B = {
     var acc = z
-    var these: Property = this
+    var these: Properties = this
     while (!these.isEmpty) {
       acc = f(acc, these.head)
       these = these.tail
@@ -65,7 +64,7 @@ case class NonEmpty(key: String, value: String, tail: Property) extends Property
   }
 }
 
-object Property {
-  def apply(t: (String, String)): Property = NonEmpty(t._1, t._2, Empty)
+object Properties {
+  def apply(t: (String, String)): Properties = Cons(t._1, t._2, Nil)
 }
 

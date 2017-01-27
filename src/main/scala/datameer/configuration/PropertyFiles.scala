@@ -29,8 +29,8 @@ object PropertyFiles {
   private def loadProperties(file: File): PropertyFile = {
     val p = new java.util.Properties()
     p.load(new FileInputStream(file))
-    val z: Property = Empty
-    val property = p.asScala.foldLeft(z)((acc: Property, tuple: (String, String)) => acc.add(tuple._1, tuple._2))
+    val z: Properties = Nil
+    val property = p.asScala.foldLeft(z)((acc: Properties, tuple: (String, String)) => acc.add(tuple._1, tuple._2))
     PropertyFile(file, property)
   }
 
@@ -43,6 +43,6 @@ object PropertyFiles {
       })
   }
 
-  case class PropertyFile(file: File, properties: Property)
+  case class PropertyFile(file: File, properties: Properties)
 
 }
