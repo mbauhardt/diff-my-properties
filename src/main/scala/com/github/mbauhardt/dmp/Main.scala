@@ -8,7 +8,7 @@ import scala.io.StdIn
 
 object Main {
 
-  val HEADER_FORMAT = "%-50s %-80s %-80s %n"
+  val HEADER_FORMAT = "%-70s %-80s %-80s %n"
 
   def main(args: Array[String]): Unit = {
     print("Path to the left properties folder: ")
@@ -55,7 +55,7 @@ object Main {
           key1 <- tuple._1.properties.keys
           value1 <- tuple._1.properties.getValue(key1)
           if tuple._2.properties.getValue(key1).isEmpty
-        } yield (key1, value1, "x")
+        } yield (key1, value1, "-")
         if (tuples.nonEmpty) {
           println()
           tuples.foreach((tuple: (String, String, String)) => tuple.copy(_1 = tuple._2))
