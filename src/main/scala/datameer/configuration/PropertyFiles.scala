@@ -31,7 +31,7 @@ object PropertyFiles {
     p.load(new FileInputStream(file))
     val z: Property = Empty
     val property = p.asScala.foldLeft(z)((acc: Property, tuple: (String, String)) => acc.add(tuple._1, tuple._2))
-    PropertyFile(file, Properties(property))
+    PropertyFile(file, property)
   }
 
   private def tree(root: File, skipHidden: Boolean = false): Stream[File] = {
@@ -43,6 +43,6 @@ object PropertyFiles {
       })
   }
 
-  case class PropertyFile(file: File, properties: Properties)
+  case class PropertyFile(file: File, properties: Property)
 
 }
