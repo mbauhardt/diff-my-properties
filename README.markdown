@@ -1,1 +1,1 @@
-![](https://github.com/mbauhardt/diff-my-properties/blob/master/demo.gif)
+![](https://raw.githubusercontent.com/mbauhardt/diff-my-properties/master/demo.gif)
