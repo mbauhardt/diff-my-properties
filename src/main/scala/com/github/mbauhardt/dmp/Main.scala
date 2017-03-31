@@ -3,20 +3,27 @@ package com.github.mbauhardt.dmp
 import java.io.File
 
 import com.github.mbauhardt.dmp.PropertyFiles.PropertyFile
+import com.lexicalscope.jewel.cli.CliFactory
 
-import scala.io.StdIn
 
 object Main {
 
   val HEADER_FORMAT = "%-70s %-80s %-80s %n"
 
+
   def main(args: Array[String]): Unit = {
-    print("Path to the left properties folder: ")
-    val rightFolder = StdIn.readLine()
 
-    print("Path to the right properties folder: ")
-    val leftFolder = StdIn.readLine()
+    var options: Options = null;
+    try {
+      //val array = JavaConversions.asJavaCollection(args).
+      options = CliFactory.parseArguments(classOf[Options], args: _*);
+    } catch {
+      case e: Exception => println(e.getMessage)
+        System.exit(-1);
+    }
 
+    val rightFolder = options.getRightFolder
+    val leftFolder = options.getLeftFolder
     val propertyFiles = PropertyFiles
       .yieldPropertyFilesWithSameName(new File(leftFolder), new File(rightFolder))
       .map(PropertyFiles.toPropertyFile)
